@@ -1,6 +1,7 @@
 package com.altun.urlshortener.shorturl;
 
 import com.altun.urlshortener.common.error.GlobalExceptionHandler;
+import com.altun.urlshortener.visit.UrlVisitService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
@@ -10,6 +11,7 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
@@ -25,6 +27,9 @@ class ShortUrlControllerTest {
 
     @MockitoBean
     private ShortUrlService shortUrlService;
+
+    @MockitoBean
+    private UrlVisitService urlVisitService;
 
     @Test
     void createReturnsCreatedResponse() throws Exception {
@@ -88,6 +93,8 @@ class ShortUrlControllerTest {
         mockMvc.perform(get("/Ab12Cd34"))
                 .andExpect(status().isFound())
                 .andExpect(header().string("Location", "https://example.com"));
+
+        verify(urlVisitService).recordVisit(shortUrl);
     }
 
     @Test
@@ -99,5 +106,17 @@ class ShortUrlControllerTest {
                 .andExpect(status().isGone())
                 .andExpect(jsonPath("$.message")
                         .value("Kısa URL'nin süresi doldu: expired1"));
+    }
+
+    @Test
+    void getStatsReturnsVisitCount() throws Exception {
+        ShortUrl shortUrl = new ShortUrl("Ab12Cd34", "https://example.com");
+        when(shortUrlService.findByCode("Ab12Cd34")).thenReturn(shortUrl);
+        when(urlVisitService.countVisits(shortUrl)).thenReturn(12L);
+
+        mockMvc.perform(get("/api/v1/urls/Ab12Cd34/stats"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.code").value("Ab12Cd34"))
+                .andExpect(jsonPath("$.visitCount").value(12));
     }
 }
