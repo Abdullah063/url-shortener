@@ -12,6 +12,8 @@ Canlı adres: `https://go.abdullahaltun.com.tr`
 - Spring Data JPA
 - PostgreSQL
 - Maven
+- Flyway
+- Docker
 
 ## Hedeflenen özellikler
 
@@ -26,3 +28,26 @@ Canlı adres: `https://go.abdullahaltun.com.tr`
 ## Durum
 
 Proje geliştirme aşamasındadır.
+
+## Yerel geliştirme
+
+Örnek ortam dosyasını kopyalayın ve PostgreSQL'i başlatın:
+
+```bash
+cp .env.example .env
+docker compose up -d
+```
+
+Uygulamayı çalıştırın:
+
+```bash
+./mvnw spring-boot:run
+```
+
+Testleri çalıştırın:
+
+```bash
+./mvnw test
+```
+
+Production ortamında veritabanı ve sunucu ayarları environment variable olarak verilmelidir.
