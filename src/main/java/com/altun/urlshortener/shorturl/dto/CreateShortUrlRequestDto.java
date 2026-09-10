@@ -1,4 +1,14 @@
 package com.altun.urlshortener.shorturl.dto;
 
-public record CreateShortUrlRequestDto(String originalUrl) {
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+
+public record CreateShortUrlRequestDto(
+        @NotBlank(message = "URL boş olamaz")
+        @Pattern(
+                regexp = "^https?://.+$",
+                message = "URL http:// veya https:// ile başlamalıdır"
+        )
+        String originalUrl
+) {
 }
