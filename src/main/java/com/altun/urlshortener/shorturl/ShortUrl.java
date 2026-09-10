@@ -21,8 +21,10 @@ public class ShortUrl {
     @Column(nullable = false, unique = true, length = 8)
     private String code;
 
+    @Column(nullable = false, length = 2048)
     private String originalUrl;
 
+    @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
 
