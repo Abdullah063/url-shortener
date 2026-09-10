@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Optional;
-
 @RestController
 @RequestMapping("/api/v1/urls")
 public class ShortUrlController {
@@ -32,8 +30,7 @@ public class ShortUrlController {
     }
 
     @GetMapping("/{code}")
-    public Optional<ShortUrlResponseDto> findByCode(@PathVariable String code) {
-        return shortUrlService.findByCode(code)
-                .map(ShortUrlResponseDto::from);
+    public ShortUrlResponseDto findByCode(@PathVariable String code) {
+        return ShortUrlResponseDto.from(shortUrlService.findByCode(code));
     }
 }

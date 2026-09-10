@@ -1,7 +1,6 @@
 package com.altun.urlshortener.shorturl;
 
 import java.security.SecureRandom;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -19,8 +18,9 @@ public class ShortUrlService {
         this.shortUrlRepository = shortUrlRepository;
     }
 
-    public Optional<ShortUrl> findByCode(String code) {
-        return shortUrlRepository.findByCode(code);
+    public ShortUrl findByCode(String code) {
+        return shortUrlRepository.findByCode(code)
+                .orElseThrow(() -> new ShortUrlNotFoundException(code));
     }
 
     public ShortUrl createShortUrl(String originalUrl) {
