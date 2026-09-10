@@ -1,6 +1,7 @@
 package com.altun.urlshortener.shorturl;
 
 import java.security.SecureRandom;
+import java.time.LocalDateTime;
 
 import org.springframework.stereotype.Service;
 
@@ -19,13 +20,19 @@ public class ShortUrlService {
     }
 
     public ShortUrl findByCode(String code) {
-        return shortUrlRepository.findByCode(code)
+        ShortUrl shortUrl = shortUrlRepository.findByCode(code)
                 .orElseThrow(() -> new ShortUrlNotFoundException(code));
+
+        if (shortUrl.isExpired()) {
+            throw new ShortUrlExpiredException(code);
+        }
+
+        return shortUrl;
     }
 
-    public ShortUrl createShortUrl(String originalUrl) {
+    public ShortUrl createShortUrl(String originalUrl, LocalDateTime expiresAt) {
         String code = generateUniqueCode();
-        ShortUrl shortUrl = new ShortUrl(code, originalUrl);
+        ShortUrl shortUrl = new ShortUrl(code, originalUrl, expiresAt);
         return shortUrlRepository.save(shortUrl);
     }
 

@@ -29,7 +29,7 @@ class ShortUrlControllerTest {
     @Test
     void createReturnsCreatedResponse() throws Exception {
         ShortUrl shortUrl = new ShortUrl("Ab12Cd34", "https://example.com");
-        when(shortUrlService.createShortUrl("https://example.com")).thenReturn(shortUrl);
+        when(shortUrlService.createShortUrl("https://example.com", null)).thenReturn(shortUrl);
 
         mockMvc.perform(post("/api/v1/urls")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -55,6 +55,21 @@ class ShortUrlControllerTest {
     }
 
     @Test
+    void createReturnsBadRequestForPastExpiration() throws Exception {
+        mockMvc.perform(post("/api/v1/urls")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {
+                                  "originalUrl":"https://example.com",
+                                  "expiresAt":"2020-01-01T00:00:00"
+                                }
+                                """))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.fieldErrors.expiresAt")
+                        .value("Son kullanma tarihi gelecekte olmalıdır"));
+    }
+
+    @Test
     void findByCodeReturnsNotFoundForUnknownCode() throws Exception {
         when(shortUrlService.findByCode("missing1"))
                 .thenThrow(new ShortUrlNotFoundException("missing1"));
@@ -73,5 +88,16 @@ class ShortUrlControllerTest {
         mockMvc.perform(get("/Ab12Cd34"))
                 .andExpect(status().isFound())
                 .andExpect(header().string("Location", "https://example.com"));
+    }
+
+    @Test
+    void redirectReturnsGoneForExpiredUrl() throws Exception {
+        when(shortUrlService.findByCode("expired1"))
+                .thenThrow(new ShortUrlExpiredException("expired1"));
+
+        mockMvc.perform(get("/expired1"))
+                .andExpect(status().isGone())
+                .andExpect(jsonPath("$.message")
+                        .value("Kısa URL'nin süresi doldu: expired1"));
     }
 }

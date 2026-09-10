@@ -8,7 +8,8 @@ public record ShortUrlResponseDto(
         Long id,
         String code,
         String originalUrl,
-        LocalDateTime createdAt
+        LocalDateTime createdAt,
+        LocalDateTime expiresAt
 ) {
 
     public static ShortUrlResponseDto from(ShortUrl shortUrl) {
@@ -16,7 +17,8 @@ public record ShortUrlResponseDto(
                 shortUrl.getId(),
                 shortUrl.getCode(),
                 shortUrl.getOriginalUrl(),
-                shortUrl.getCreatedAt()
+                shortUrl.getCreatedAt(),
+                shortUrl.getExpiresAt()
         );
     }
 }

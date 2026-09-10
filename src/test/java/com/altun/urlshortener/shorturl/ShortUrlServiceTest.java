@@ -6,6 +6,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -35,7 +36,7 @@ class ShortUrlServiceTest {
         when(shortUrlRepository.save(any(ShortUrl.class)))
                 .thenAnswer(invocation -> invocation.getArgument(0));
 
-        ShortUrl result = shortUrlService.createShortUrl("https://example.com");
+        ShortUrl result = shortUrlService.createShortUrl("https://example.com", null);
 
         assertEquals("https://example.com", result.getOriginalUrl());
         assertTrue(result.getCode().matches("[A-Za-z0-9]{8}"));
@@ -63,5 +64,22 @@ class ShortUrlServiceTest {
         );
 
         assertEquals("Kısa URL bulunamadı: missing1", exception.getMessage());
+    }
+
+    @Test
+    void findByCodeThrowsExceptionWhenUrlIsExpired() {
+        ShortUrl shortUrl = new ShortUrl(
+                "expired1",
+                "https://example.com",
+                LocalDateTime.now().minusMinutes(1)
+        );
+        when(shortUrlRepository.findByCode("expired1")).thenReturn(Optional.of(shortUrl));
+
+        ShortUrlExpiredException exception = assertThrows(
+                ShortUrlExpiredException.class,
+                () -> shortUrlService.findByCode("expired1")
+        );
+
+        assertEquals("Kısa URL'nin süresi doldu: expired1", exception.getMessage());
     }
 }

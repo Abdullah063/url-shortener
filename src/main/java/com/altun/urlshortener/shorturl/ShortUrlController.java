@@ -25,7 +25,10 @@ public class ShortUrlController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public ShortUrlResponseDto create(@Valid @RequestBody CreateShortUrlRequestDto request) {
-        ShortUrl shortUrl = shortUrlService.createShortUrl(request.originalUrl());
+        ShortUrl shortUrl = shortUrlService.createShortUrl(
+                request.originalUrl(),
+                request.expiresAt()
+        );
         return ShortUrlResponseDto.from(shortUrl);
     }
 

@@ -27,14 +27,20 @@ public class ShortUrl {
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
+    private LocalDateTime expiresAt;
 
     protected ShortUrl() {
     }
 
     public ShortUrl(String code, String originalUrl) {
+        this(code, originalUrl, null);
+    }
+
+    public ShortUrl(String code, String originalUrl, LocalDateTime expiresAt) {
         this.code = code;
         this.originalUrl = originalUrl;
         this.createdAt = LocalDateTime.now();
+        this.expiresAt = expiresAt;
     }
 
     public String getOriginalUrl() {
@@ -51,6 +57,14 @@ public class ShortUrl {
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
+    }
+
+    public LocalDateTime getExpiresAt() {
+        return expiresAt;
+    }
+
+    public boolean isExpired() {
+        return expiresAt != null && expiresAt.isBefore(LocalDateTime.now());
     }
 
     public void setCode(String code) {
