@@ -1,8 +1,9 @@
 package com.altun.urlshortener.shorturl;
 
-import org.springframework.http.HttpStatus;
 import com.altun.urlshortener.shorturl.dto.CreateShortUrlRequestDto;
+import com.altun.urlshortener.shorturl.dto.ShortUrlResponseDto;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,12 +26,14 @@ public class ShortUrlController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public ShortUrl create(@Valid @RequestBody CreateShortUrlRequestDto request) {
-        return shortUrlService.createShortUrl(request.originalUrl());
+    public ShortUrlResponseDto create(@Valid @RequestBody CreateShortUrlRequestDto request) {
+        ShortUrl shortUrl = shortUrlService.createShortUrl(request.originalUrl());
+        return ShortUrlResponseDto.from(shortUrl);
     }
 
     @GetMapping("/{code}")
-    public Optional<ShortUrl> findByCode(@PathVariable String code) {
-        return shortUrlService.findByCode(code);
+    public Optional<ShortUrlResponseDto> findByCode(@PathVariable String code) {
+        return shortUrlService.findByCode(code)
+                .map(ShortUrlResponseDto::from);
     }
 }
