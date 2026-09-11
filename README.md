@@ -15,6 +15,7 @@ Canlı adres: `https://go.abdullahaltun.com.tr`
 - Flyway
 - Docker
 - HTML, CSS ve JavaScript
+- OpenAPI (Swagger UI)
 
 ## Özellikler
 
@@ -24,6 +25,8 @@ Canlı adres: `https://go.abdullahaltun.com.tr`
 - Geçersiz bağlantılar için uygun hata cevapları
 - Tıklanma istatistikleri
 - Responsive web arayüzü
+- IP tabanlı istek sınırlandırma
+- Swagger/OpenAPI dokümantasyonu
 - Otomatik testler
 - Docker ile çalıştırma
 

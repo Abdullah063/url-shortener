@@ -1,5 +1,6 @@
 package com.altun.urlshortener.common.error;
 
+import com.altun.urlshortener.common.ratelimit.RateLimitExceededException;
 import com.altun.urlshortener.shorturl.ShortUrlExpiredException;
 import com.altun.urlshortener.shorturl.ShortUrlNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -42,6 +43,22 @@ public class GlobalExceptionHandler {
                 Instant.now(),
                 HttpStatus.GONE.value(),
                 HttpStatus.GONE.getReasonPhrase(),
+                exception.getMessage(),
+                request.getRequestURI(),
+                Map.of()
+        );
+    }
+
+    @ExceptionHandler(RateLimitExceededException.class)
+    @ResponseStatus(HttpStatus.TOO_MANY_REQUESTS)
+    public ApiErrorResponse handleRateLimit(
+            RateLimitExceededException exception,
+            HttpServletRequest request
+    ) {
+        return new ApiErrorResponse(
+                Instant.now(),
+                HttpStatus.TOO_MANY_REQUESTS.value(),
+                HttpStatus.TOO_MANY_REQUESTS.getReasonPhrase(),
                 exception.getMessage(),
                 request.getRequestURI(),
                 Map.of()
