@@ -39,6 +39,7 @@ docker compose up -d --build
 ```
 
 Uygulama `http://localhost:8080` adresinde çalışır.
+Sağlık durumu `http://localhost:8080/actuator/health` adresinden kontrol edilir.
 
 Spring Boot'u Docker dışında geliştirirken yalnızca PostgreSQL'i başlatın:
 
