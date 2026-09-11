@@ -14,20 +14,22 @@ Canlı adres: `https://go.abdullahaltun.com.tr`
 - Maven
 - Flyway
 - Docker
+- HTML, CSS ve JavaScript
 
-## Hedeflenen özellikler
+## Özellikler
 
 - Uzun URL için benzersiz kısa kod oluşturma
 - Kısa bağlantıdan asıl adrese yönlendirme
 - İsteğe bağlı son kullanma tarihi
 - Geçersiz bağlantılar için uygun hata cevapları
 - Tıklanma istatistikleri
+- Responsive web arayüzü
 - Otomatik testler
 - Docker ile çalıştırma
 
 ## Durum
 
-Proje geliştirme aşamasındadır.
+Uygulama production ortamında yayındadır ve geliştirilmeye devam etmektedir.
 
 ## Yerel geliştirme
 

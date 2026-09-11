@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Uzun bağlantıları saniyeler içinde kısa ve paylaşılabilir hale getirin.">
+    <meta name="theme-color" content="#10251a">
+    <title>go.altun — URL Kısaltıcı</title>
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+<div class="page-shell">
+    <header class="site-header">
+        <a class="brand" href="/" aria-label="go.altun ana sayfa">
+            <span class="brand-mark" aria-hidden="true">↗</span>
+            <span>go<span class="brand-dot">.</span>altun</span>
+        </a>
+        <a class="header-link" href="https://github.com/Abdullah063/url-shortener" target="_blank" rel="noreferrer">
+            GitHub
+            <span aria-hidden="true">↗</span>
+        </a>
+    </header>
+
+    <main>
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="eyebrow"><span></span> Hızlı, sade, güvenilir</div>
+            <h1 id="hero-title">Uzun bağlantıları<br><em>kısalt, paylaş, ölç.</em></h1>
+            <p>Bağlantını saniyeler içinde sadeleştir. İstersen son kullanma tarihi belirle ve ziyaretlerini takip et.</p>
+        </section>
+
+        <section class="workspace" aria-label="URL araçları">
+            <div class="tabs" role="tablist" aria-label="Araç seçimi">
+                <button class="tab is-active" id="shorten-tab" type="button" role="tab" aria-selected="true" aria-controls="shorten-panel" data-panel="shorten-panel">
+                    Link kısalt
+                </button>
+                <button class="tab" id="stats-tab" type="button" role="tab" aria-selected="false" aria-controls="stats-panel" data-panel="stats-panel">
+                    İstatistik
+                </button>
+            </div>
+
+            <div class="panel" id="shorten-panel" role="tabpanel" aria-labelledby="shorten-tab">
+                <form id="shorten-form" novalidate>
+                    <label for="original-url">Kısaltmak istediğin bağlantı</label>
+                    <div class="input-row">
+                        <input id="original-url" name="originalUrl" type="url" inputmode="url" autocomplete="url" placeholder="https://ornek.com/cok-uzun-bir-baglanti" required>
+                        <button class="primary-button" type="submit">
+                            <span>Kısalt</span>
+                            <span aria-hidden="true">→</span>
+                        </button>
+                    </div>
+
+                    <div class="form-footer">
+                        <label class="expiry-control" for="expires-at">
+                            <span class="calendar-icon" aria-hidden="true">◷</span>
+                            Son kullanma tarihi
+                        </label>
+                        <input id="expires-at" name="expiresAt" type="datetime-local">
+                    </div>
+                    <p class="form-message" id="shorten-message" role="alert"></p>
+                </form>
+
+                <div class="result-card" id="shorten-result" aria-live="polite" hidden>
+                    <div>
+                        <span class="result-label">Kısa bağlantın hazır</span>
+                        <a id="short-url" href="#" target="_blank" rel="noreferrer"></a>
+                        <p id="result-meta"></p>
+                    </div>
+                    <button class="copy-button" id="copy-button" type="button">
+                        <span id="copy-label">Kopyala</span>
+                        <span aria-hidden="true">▣</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="panel" id="stats-panel" role="tabpanel" aria-labelledby="stats-tab" hidden>
+                <form id="stats-form" novalidate>
+                    <label for="stats-code">Kısa bağlantı veya kod</label>
+                    <div class="input-row">
+                        <input id="stats-code" name="code" type="text" autocomplete="off" placeholder="https://go.abdullahaltun.com.tr/Ab12Cd34" required>
+                        <button class="primary-button" type="submit">
+                            <span>Sorgula</span>
+                            <span aria-hidden="true">→</span>
+                        </button>
+                    </div>
+                    <p class="form-message" id="stats-message" role="alert"></p>
+                </form>
+
+                <div class="stats-result" id="stats-result" aria-live="polite" hidden>
+                    <div class="metric">
+                        <span>Toplam ziyaret</span>
+                        <strong id="visit-count">0</strong>
+                    </div>
+                    <div class="stats-details">
+                        <div><span>Kod</span><strong id="stats-result-code"></strong></div>
+                        <div><span>Oluşturulma</span><strong id="stats-created-at"></strong></div>
+                        <div><span>Hedef</span><a id="stats-original-url" href="#" target="_blank" rel="noreferrer"></a></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features" aria-label="Özellikler">
+            <article>
+                <span class="feature-number">01</span>
+                <h2>Anında oluştur</h2>
+                <p>Tek istekle benzersiz ve paylaşılabilir bağlantılar.</p>
+            </article>
+            <article>
+                <span class="feature-number">02</span>
+                <h2>Süreyi sen belirle</h2>
+                <p>Geçici paylaşımlar için isteğe bağlı bitiş tarihi.</p>
+            </article>
+            <article>
+                <span class="feature-number">03</span>
+                <h2>Ziyaretleri izle</h2>
+                <p>Her kısa bağlantının toplam tıklanma sayısını gör.</p>
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        <span>Abdullah Altun tarafından geliştirildi.</span>
+        <span class="status"><i></i> Sistem çalışıyor</span>
+    </footer>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="/assets/app.js" defer></script>
+</body>
+</html>

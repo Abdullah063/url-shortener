@@ -23,7 +23,7 @@ public class RedirectController {
         this.urlVisitService = urlVisitService;
     }
 
-    @GetMapping("/{code}")
+    @GetMapping("/{code:[A-Za-z0-9]{8}}")
     public ResponseEntity<Void> redirect(@PathVariable String code) {
         ShortUrl shortUrl = shortUrlService.findByCode(code);
         urlVisitService.recordVisit(shortUrl);
