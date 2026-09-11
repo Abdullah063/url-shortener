@@ -31,16 +31,19 @@ Proje geliştirme aşamasındadır.
 
 ## Yerel geliştirme
 
-Örnek ortam dosyasını kopyalayın ve PostgreSQL'i başlatın:
+Örnek ortam dosyasını kopyalayın ve tüm uygulamayı Docker ile başlatın:
 
 ```bash
 cp .env.example .env
-docker compose up -d
+docker compose up -d --build
 ```
 
-Uygulamayı çalıştırın:
+Uygulama `http://localhost:8080` adresinde çalışır.
+
+Spring Boot'u Docker dışında geliştirirken yalnızca PostgreSQL'i başlatın:
 
 ```bash
+docker compose up -d postgres
 ./mvnw spring-boot:run
 ```
 
