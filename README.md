@@ -55,3 +55,4 @@ Testleri çalıştırın:
 ```
 
 Production ortamında veritabanı ve sunucu ayarları environment variable olarak verilmelidir.
+`POSTGRES_PASSWORD` production ortamında güçlü ve benzersiz bir değerle değiştirilmelidir.
