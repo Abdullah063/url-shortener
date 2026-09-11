@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#10251a">
+    <title>Admin Paneli — go.altun</title>
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/assets/styles.css?v=20260912-1">
+    <link rel="stylesheet" href="/assets/admin.css?v=20260912-1">
+</head>
+<body class="admin-body">
+<div class="admin-shell">
+    <header class="admin-header">
+        <a class="brand" href="/" aria-label="go.altun ana sayfa">
+            <span class="brand-mark" aria-hidden="true">↗</span>
+            <span>go<span class="brand-dot">.</span>altun</span>
+        </a>
+        <div class="admin-header-actions">
+            <a class="admin-home-link" href="/">Siteye dön</a>
+            <button class="logout-button" id="logout-button" type="button">Çıkış yap</button>
+        </div>
+    </header>
+
+    <main>
+        <section class="admin-intro">
+            <div>
+                <span class="admin-kicker">Yönetim alanı</span>
+                <h1>Bağlantılar</h1>
+                <p>Oluşturulan kısa bağlantıları, durumlarını ve tıklanma sayılarını yönet.</p>
+            </div>
+            <div class="total-card">
+                <span>Toplam bağlantı</span>
+                <strong id="total-elements">—</strong>
+            </div>
+        </section>
+
+        <section class="admin-panel" aria-labelledby="links-title">
+            <div class="admin-panel-heading">
+                <div>
+                    <h2 id="links-title">Tüm bağlantılar</h2>
+                    <p>En yeni bağlantılar önce gösterilir.</p>
+                </div>
+                <button class="refresh-button" id="refresh-button" type="button">Yenile</button>
+            </div>
+
+            <p class="admin-message" id="admin-message" role="alert"></p>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Kısa bağlantı</th>
+                        <th>Hedef</th>
+                        <th>Tıklanma</th>
+                        <th>Durum</th>
+                        <th>Oluşturulma</th>
+                        <th><span class="sr-only">İşlemler</span></th>
+                    </tr>
+                    </thead>
+                    <tbody id="links-body"></tbody>
+                </table>
+                <div class="empty-state" id="empty-state" hidden>
+                    <strong>Henüz bağlantı yok</strong>
+                    <span>İlk kısa bağlantı oluşturulduğunda burada görünecek.</span>
+                </div>
+            </div>
+
+            <div class="pagination" id="pagination" hidden>
+                <button id="previous-page" type="button">← Önceki</button>
+                <span id="page-info"></span>
+                <button id="next-page" type="button">Sonraki →</button>
+            </div>
+        </section>
+    </main>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="/assets/admin.js?v=20260912-1" defer></script>
+</body>
+</html>

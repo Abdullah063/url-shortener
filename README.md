@@ -27,6 +27,8 @@ Canlı adres: `https://go.abdullahaltun.com.tr`
 - Responsive web arayüzü
 - IP tabanlı istek sınırlandırma
 - Swagger/OpenAPI dokümantasyonu
+- Spring Security ile korunan admin paneli
+- Bağlantıları aktifleştirme, pasifleştirme ve silme
 - Otomatik testler
 - Docker ile çalıştırma
 
@@ -61,3 +63,6 @@ Testleri çalıştırın:
 
 Production ortamında veritabanı ve sunucu ayarları environment variable olarak verilmelidir.
 `POSTGRES_PASSWORD` production ortamında güçlü ve benzersiz bir değerle değiştirilmelidir.
+`ADMIN_USERNAME` ve `ADMIN_PASSWORD` admin paneli giriş bilgilerini belirler.
+
+Admin paneli `http://localhost:8080/admin` adresindedir.

@@ -1,7 +1,9 @@
 package com.altun.urlshortener.common.error;
 
+import com.altun.urlshortener.admin.AdminShortUrlNotFoundException;
 import com.altun.urlshortener.common.ratelimit.RateLimitExceededException;
 import com.altun.urlshortener.shorturl.ShortUrlExpiredException;
+import com.altun.urlshortener.shorturl.ShortUrlInactiveException;
 import com.altun.urlshortener.shorturl.ShortUrlNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -16,6 +18,22 @@ import java.util.Map;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    @ExceptionHandler(AdminShortUrlNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ApiErrorResponse handleAdminNotFound(
+            AdminShortUrlNotFoundException exception,
+            HttpServletRequest request
+    ) {
+        return new ApiErrorResponse(
+                Instant.now(),
+                HttpStatus.NOT_FOUND.value(),
+                HttpStatus.NOT_FOUND.getReasonPhrase(),
+                exception.getMessage(),
+                request.getRequestURI(),
+                Map.of()
+        );
+    }
 
     @ExceptionHandler(ShortUrlNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
@@ -37,6 +55,22 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.GONE)
     public ApiErrorResponse handleExpired(
             ShortUrlExpiredException exception,
+            HttpServletRequest request
+    ) {
+        return new ApiErrorResponse(
+                Instant.now(),
+                HttpStatus.GONE.value(),
+                HttpStatus.GONE.getReasonPhrase(),
+                exception.getMessage(),
+                request.getRequestURI(),
+                Map.of()
+        );
+    }
+
+    @ExceptionHandler(ShortUrlInactiveException.class)
+    @ResponseStatus(HttpStatus.GONE)
+    public ApiErrorResponse handleInactive(
+            ShortUrlInactiveException exception,
             HttpServletRequest request
     ) {
         return new ApiErrorResponse(

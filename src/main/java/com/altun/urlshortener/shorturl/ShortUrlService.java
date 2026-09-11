@@ -27,6 +27,10 @@ public class ShortUrlService {
             throw new ShortUrlExpiredException(code);
         }
 
+        if (!shortUrl.isActive()) {
+            throw new ShortUrlInactiveException(code);
+        }
+
         return shortUrl;
     }
 

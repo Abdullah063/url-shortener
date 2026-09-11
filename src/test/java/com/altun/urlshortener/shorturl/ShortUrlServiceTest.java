@@ -82,4 +82,18 @@ class ShortUrlServiceTest {
 
         assertEquals("Kısa URL'nin süresi doldu: expired1", exception.getMessage());
     }
+
+    @Test
+    void findByCodeThrowsExceptionWhenUrlIsInactive() {
+        ShortUrl shortUrl = new ShortUrl("inactive", "https://example.com");
+        shortUrl.setActive(false);
+        when(shortUrlRepository.findByCode("inactive")).thenReturn(Optional.of(shortUrl));
+
+        ShortUrlInactiveException exception = assertThrows(
+                ShortUrlInactiveException.class,
+                () -> shortUrlService.findByCode("inactive")
+        );
+
+        assertEquals("Kısa URL pasif durumda: inactive", exception.getMessage());
+    }
 }

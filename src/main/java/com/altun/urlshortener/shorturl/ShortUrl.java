@@ -29,6 +29,9 @@ public class ShortUrl {
 
     private LocalDateTime expiresAt;
 
+    @Column(nullable = false)
+    private boolean active = true;
+
     protected ShortUrl() {
     }
 
@@ -63,6 +66,10 @@ public class ShortUrl {
         return expiresAt;
     }
 
+    public boolean isActive() {
+        return active;
+    }
+
     public boolean isExpired() {
         return expiresAt != null && expiresAt.isBefore(LocalDateTime.now());
     }
@@ -77,5 +84,9 @@ public class ShortUrl {
 
     public void setOriginalUrl(String originalUrl) {
         this.originalUrl = originalUrl;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

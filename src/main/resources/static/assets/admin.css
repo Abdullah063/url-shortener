@@ -1,0 +1,384 @@
+.admin-body {
+    min-height: 100vh;
+}
+
+.admin-shell {
+    width: min(1240px, calc(100% - 40px));
+    margin: 0 auto;
+}
+
+.admin-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 76px;
+    border-bottom: 1px solid var(--line);
+}
+
+.admin-header-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.admin-home-link,
+.logout-button,
+.refresh-button,
+.pagination button,
+.row-action {
+    border: 0;
+    color: var(--ink);
+    background: transparent;
+    font-weight: 750;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.admin-home-link {
+    padding: 10px 4px;
+    font-size: 13px;
+}
+
+.logout-button,
+.refresh-button,
+.pagination button {
+    padding: 10px 14px;
+    border: 1px solid #cfd6cc;
+    border-radius: 10px;
+    background: rgba(255, 255, 252, 0.8);
+    font-size: 13px;
+}
+
+.admin-intro {
+    display: flex;
+    gap: 32px;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 56px 0 30px;
+}
+
+.admin-kicker {
+    color: #5b7f4f;
+    font-size: 11px;
+    font-weight: 850;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+}
+
+.admin-intro h1 {
+    margin: 8px 0 6px;
+    font-size: clamp(38px, 5vw, 60px);
+    letter-spacing: -0.055em;
+}
+
+.admin-intro p,
+.admin-panel-heading p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.total-card {
+    min-width: 160px;
+    padding: 18px 20px;
+    border: 1px solid #cfe4bd;
+    border-radius: 16px;
+    background: #edfbdf;
+}
+
+.total-card span {
+    display: block;
+    color: #62755a;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.total-card strong {
+    display: block;
+    margin-top: 3px;
+    font-size: 30px;
+    letter-spacing: -0.04em;
+}
+
+.admin-panel {
+    margin-bottom: 60px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    background: rgba(255, 255, 252, 0.9);
+    box-shadow: var(--shadow);
+}
+
+.admin-panel-heading {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 24px;
+    border-bottom: 1px solid var(--line);
+}
+
+.admin-panel-heading h2 {
+    margin: 0 0 4px;
+    font-size: 18px;
+    letter-spacing: -0.025em;
+}
+
+.admin-message {
+    min-height: 0;
+    margin: 0;
+    padding: 0 24px;
+    color: var(--danger);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.admin-message:not(:empty) {
+    padding-top: 14px;
+}
+
+.table-wrap {
+    min-width: 0;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 17px 16px;
+    border-bottom: 1px solid #ecefe8;
+    text-align: left;
+    vertical-align: middle;
+}
+
+th:first-child,
+td:first-child {
+    padding-left: 24px;
+}
+
+th:last-child,
+td:last-child {
+    padding-right: 24px;
+}
+
+th {
+    color: #79827c;
+    background: #f7f8f4;
+    font-size: 10px;
+    font-weight: 850;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+td {
+    max-width: 290px;
+    font-size: 13px;
+}
+
+.short-link,
+.target-link {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.short-link {
+    color: #2d6b36;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.target-link {
+    color: var(--muted);
+}
+
+.visit-count {
+    font-size: 16px;
+    font-weight: 850;
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 9px;
+    border-radius: 999px;
+    color: #276232;
+    background: #e8f8dc;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.status-badge.is-inactive,
+.status-badge.is-expired {
+    color: #765b23;
+    background: #fff1cf;
+}
+
+.date-cell {
+    color: var(--muted);
+    white-space: nowrap;
+}
+
+.row-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
+.row-action {
+    padding: 7px 9px;
+    border-radius: 8px;
+    background: #edf0e9;
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+.row-action.is-danger {
+    color: var(--danger);
+    background: #fff0ee;
+}
+
+.row-action:disabled,
+.pagination button:disabled {
+    cursor: wait;
+    opacity: 0.5;
+}
+
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+    padding: 60px 20px;
+    color: var(--muted);
+    text-align: center;
+}
+
+.empty-state strong {
+    color: var(--ink);
+}
+
+.pagination {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 17px 24px;
+}
+
+.pagination span {
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+@media (max-width: 760px) {
+    .admin-shell {
+        width: min(100% - 24px, 1240px);
+    }
+
+    .admin-home-link {
+        display: none;
+    }
+
+    .admin-intro {
+        align-items: stretch;
+        flex-direction: column;
+        padding: 34px 0 22px;
+    }
+
+    .total-card {
+        min-width: 0;
+    }
+
+    .admin-panel-heading {
+        padding: 18px;
+    }
+
+    .table-wrap {
+        overflow: visible;
+    }
+
+    table,
+    tbody,
+    tr,
+    td {
+        display: block;
+        width: 100%;
+    }
+
+    thead {
+        display: none;
+    }
+
+    tr {
+        padding: 15px 18px;
+        border-bottom: 1px solid var(--line);
+    }
+
+    td,
+    th:first-child,
+    td:first-child,
+    th:last-child,
+    td:last-child {
+        max-width: none;
+        padding: 6px 0;
+        border: 0;
+    }
+
+    td::before {
+        display: block;
+        margin-bottom: 3px;
+        color: #8a928d;
+        content: attr(data-label);
+        font-size: 9px;
+        font-weight: 850;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+
+    .row-actions {
+        justify-content: flex-start;
+        padding-top: 5px;
+    }
+
+    .short-link,
+    .target-link {
+        overflow-wrap: anywhere;
+        white-space: normal;
+    }
+
+    .pagination {
+        justify-content: space-between;
+        padding: 15px 18px;
+    }
+}
+
+@media (max-width: 420px) {
+    .admin-header .brand {
+        font-size: 17px;
+    }
+
+    .logout-button {
+        padding: 9px 11px;
+        font-size: 12px;
+    }
+}
